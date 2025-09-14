@@ -6,7 +6,6 @@ export async function getAbout(req, res) {
   res.json(result[0])
 }
 
-
 export async function updateAbout(req, res) {
   const { id } = req.params
   const { texto } = req.body

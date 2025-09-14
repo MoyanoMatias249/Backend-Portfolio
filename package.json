@@ -16,5 +16,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoyanoMatias249/Backend-Portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MoyanoMatias249/Backend-Portfolio/issues"
+  },
+  "homepage": "https://github.com/MoyanoMatias249/Backend-Portfolio#readme",
   "description": ""
 }

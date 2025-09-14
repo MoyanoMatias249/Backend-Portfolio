@@ -7,17 +7,26 @@ export async function getSkills(req, res) {
 }
 
 export async function addSkill(req, res) {
-  const { nombre, nivel } = req.body
-  await sql`INSERT INTO skills (nombre, nivel) VALUES (${nombre}, ${nivel})`
-  res.json({ mensaje: 'Skill agregada' })
+  const { nombre, nivel, descripcion, icono } = req.body;
+  await sql`
+    INSERT INTO skills (nombre, nivel, descripcion, icono)
+    VALUES (${nombre}, ${nivel}, ${descripcion}, ${icono})
+  `;
+  res.json({ mensaje: 'Skill agregada' });
 }
 
+
 export async function updateSkill(req, res) {
-  const { id } = req.params
-  const { nombre, nivel } = req.body
-  await sql`UPDATE skills SET nombre = ${nombre}, nivel = ${nivel} WHERE id = ${id}`
-  res.json({ mensaje: 'Skill actualizada' })
+  const { id } = req.params;
+  const { nombre, nivel, descripcion, icono } = req.body;
+  await sql`
+    UPDATE skills
+    SET nombre = ${nombre}, nivel = ${nivel}, descripcion = ${descripcion}, icono = ${icono}
+    WHERE id = ${id}
+  `;
+  res.json({ mensaje: 'Skill actualizada' });
 }
+
 
 export async function deleteSkill(req, res) {
   const { id } = req.params

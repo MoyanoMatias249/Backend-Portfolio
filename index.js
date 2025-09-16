@@ -1,6 +1,8 @@
 // backend/index.js
 import express from 'express';
 import cors from 'cors';
+import sql from './db.js';
+import bcrypt from 'bcrypt';
 
 import aboutRoutes from './routes/about.js';
 import skillsRoutes from './routes/skills.js';
@@ -23,6 +25,26 @@ app.use('/api/projects', projectsRoutes);
 app.use('/api/experience', experienceRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
+
+// Definir contraseña para modo Admin
+async function asegurarContraseñaAdmin() {
+  try {
+    const contraseña = '5796';
+    const result = await sql`SELECT id FROM admin_config LIMIT 1`;
+
+    if (result.length > 0) {
+      console.log('Contraseña ya configurada');
+      return;
+    }
+    const hash = await bcrypt.hash(contraseña, 10);
+    await sql`INSERT INTO admin_config (password_hash) VALUES (${hash})`;
+    console.log('Contraseña insertada automáticamente');
+  } catch (error) {
+    console.error('Error al asegurar contraseña admin:', error);
+  }
+}
+
+asegurarContraseñaAdmin();
 
 // Iniciar servidor
 app.listen(PORT, () => {

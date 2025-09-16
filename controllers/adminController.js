@@ -3,14 +3,19 @@ import sql from '../db.js';
 import bcrypt from 'bcrypt';
 
 export async function verificarAdmin(req, res) {
-  const { password } = req.body;
-  const result = await sql`SELECT password_hash FROM admin_config LIMIT 1`;
-  const hash = result[0]?.password_hash;
+  try {
+    const { password } = req.body;
+    const result = await sql`SELECT password_hash FROM admin_config LIMIT 1`;
+    const hash = result[0]?.password_hash;
 
-  if (!hash) return res.status(500).json({ error: 'No hay contraseña configurada' });
+    if (!hash) return res.status(500).json({ error: 'No hay contraseña configurada' });
 
-  const match = await bcrypt.compare(password, hash);
-  if (!match) return res.status(401).json({ error: 'Contraseña incorrecta' });
+    const match = await bcrypt.compare(password, hash);
+    if (!match) return res.status(401).json({ error: 'Contraseña incorrecta' });
 
-  res.json({ mensaje: 'Acceso concedido' });
+    res.json({ mensaje: 'Acceso concedido' });
+  } catch (error) {
+    console.error('Error en verificarAdmin:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 }

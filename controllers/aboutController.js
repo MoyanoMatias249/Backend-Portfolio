@@ -1,11 +1,13 @@
 // backend/controllers/aboutController.js
 import sql  from '../db.js';
 
+// Mostrar About
 export async function getAbout(req, res) {
   const result = await sql`SELECT * FROM about LIMIT 1`
   res.json(result[0])
 }
 
+// Actualizar About
 export async function updateAbout(req, res) {
   const { id } = req.params
   const { texto } = req.body

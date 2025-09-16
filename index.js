@@ -7,6 +7,7 @@ import skillsRoutes from './routes/skills.js';
 import projectsRoutes from './routes/projects.js';
 import experienceRoutes from './routes/experience.js';
 import contactRoutes from './routes/contact.js';
+import adminRoutes from './routes/admin.js';
 
 const app = express();
 const PORT = 3001;
@@ -21,6 +22,7 @@ app.use('/api/skills', skillsRoutes);
 app.use('/api/projects', projectsRoutes);
 app.use('/api/experience', experienceRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Iniciar servidor
 app.listen(PORT, () => {

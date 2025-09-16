@@ -1,11 +1,13 @@
 // backend/controllers/skillsController.js
 import sql from '../db.js'
 
+// Mostrar Habilidades
 export async function getSkills(req, res) {
   const result = await sql`SELECT * FROM skills`
   res.json(result)
 }
 
+// Agregar una nueva Habilidad
 export async function addSkill(req, res) {
   const { nombre, nivel, descripcion, icono } = req.body;
   await sql`
@@ -15,7 +17,7 @@ export async function addSkill(req, res) {
   res.json({ mensaje: 'Skill agregada' });
 }
 
-
+// Actualizar una Habilidad
 export async function updateSkill(req, res) {
   const { id } = req.params;
   const { nombre, nivel, descripcion, icono } = req.body;
@@ -27,7 +29,7 @@ export async function updateSkill(req, res) {
   res.json({ mensaje: 'Skill actualizada' });
 }
 
-
+// Borrar una Habilidad
 export async function deleteSkill(req, res) {
   const { id } = req.params
   await sql`DELETE FROM skills WHERE id = ${id}`

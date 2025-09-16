@@ -1,6 +1,7 @@
 // backend/controllers/projectsController.js
 import sql from '../db.js'
 
+// Mostrar Proyectos
 export async function getProjects(req, res) {
   const projects = await sql`SELECT * FROM projects`
   const techs = await sql`SELECT project_id, tecnologia FROM project_tech`
@@ -19,6 +20,7 @@ export async function getProjects(req, res) {
   res.json(enriched)
 }
 
+// Agregar un nuevo Proyecto
 export async function addProject(req, res) {
   const { titulo, descripcion, captura, repo, tech = [] } = req.body
   const result = await sql`
@@ -35,6 +37,7 @@ export async function addProject(req, res) {
   res.json({ mensaje: 'Proyecto agregado', id: projectId })
 }
 
+// Actualizar un Proyecto
 export async function updateProject(req, res) {
   const { id } = req.params
   const { titulo, descripcion, captura, repo, tech = [] } = req.body
@@ -52,6 +55,7 @@ export async function updateProject(req, res) {
   res.json({ mensaje: 'Proyecto actualizado' })
 }
 
+// Borrar un Proyecto
 export async function deleteProject(req, res) {
   const { id } = req.params
   await sql`DELETE FROM project_tech WHERE project_id = ${id}`

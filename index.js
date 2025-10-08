@@ -18,6 +18,8 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
+sql`SELECT 1`.then(() => console.log('Conexión OK')).catch(err => console.error('Error de conexión:', err));
+
 // Rutas
 app.use('/api/about', aboutRoutes);
 app.use('/api/skills', skillsRoutes);

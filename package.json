@@ -25,5 +25,8 @@
     "url": "https://github.com/MoyanoMatias249/Backend-Portfolio/issues"
   },
   "homepage": "https://github.com/MoyanoMatias249/Backend-Portfolio#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "supabase": "^2.48.3"
+  }
 }

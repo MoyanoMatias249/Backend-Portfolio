@@ -27,7 +27,7 @@ Deno.serve(async (req: Request) => {
     }
 
     // ─── CREATE SKILL ──────────────────────────────────────
-    if (method === 'POST' && path === '/') {
+    if (method === 'POST' && (path === '' || path === '/')) {
       const { nombre, nivel, descripcion, icono } = await req.json()
       await sql`
         INSERT INTO skills (nombre, nivel, descripcion, icono)

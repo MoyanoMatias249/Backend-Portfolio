@@ -44,7 +44,7 @@ Deno.serve(async (req: Request) => {
     }
 
     // ─── CREATE PROJECT ────────────────────────────────────
-    if (method === 'POST' && path === '/') {
+    if (method === 'POST' && (path === '' || path === '/')) {
       const { titulo, descripcion, captura, repo, tech = [] } = await req.json()
       const result = await sql`
         INSERT INTO projects (titulo, descripcion, captura, repo)

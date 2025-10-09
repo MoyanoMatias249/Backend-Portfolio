@@ -27,7 +27,7 @@ Deno.serve(async (req: Request) => {
     }
 
     // ─── CREATE EXPERIENCE ─────────────────────────────────
-    if (method === 'POST' && path === '/') {
+    if (method === 'POST' && (path === '' || path === '/')) {
       const { experiencia, anio } = await req.json()
       await sql`INSERT INTO experience (experiencia, anio) VALUES (${experiencia}, ${anio})`
       return corsJson({ mensaje: 'Experiencia agregada' })
